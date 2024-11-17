@@ -194,9 +194,7 @@ def show_image(image, label=None):
 
 if __name__ == "__main__":
 
-    cmnist = CMNIST(
-        r"C:\Users\Asus\Documents\Code\Towards Environment Invariant Representation Learning\data"
-    )
+    cmnist = CMNIST(r"...")  # NOTE
     envs_dataset = cmnist.create_environments()
 
     for env_num, env in enumerate(envs_dataset):
