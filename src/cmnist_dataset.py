@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from torch.utils.data import Dataset, ConcatDataset, Subset
 from torchvision import datasets
 from torchvision.utils import make_grid
+from utils import show_image
 
 
 class CMNISTDataset(Dataset):
@@ -186,16 +187,6 @@ class CMNIST:
         if combine_datasets:
             return self._combine_datasets(environment_datasets)
         return environment_datasets
-
-
-def show_image(image, label=None):
-    image = image.permute((1, 2, 0)).cpu()
-    image = torch.dstack([image, torch.zeros(image.shape[:-1])])
-    plt.imshow(image)
-    plt.axis("off")
-
-    if label is not None:
-        plt.title(f"Label: {label.item()}")
 
 
 if __name__ == "__main__":
