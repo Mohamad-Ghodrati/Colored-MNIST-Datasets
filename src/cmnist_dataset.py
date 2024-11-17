@@ -74,6 +74,12 @@ class CMNIST:
         transform (torch.nn.Module, optional): Optional transformations for MNIST images. Default is None.
         downsample (bool, optional): If True, downsample MNIST images from 28x28 to 14x14. Default is True.
 
+    Caution:
+    - Note that only the red and green channels are used for colorization in this implementation.
+    - The blue channel is not utilized.
+    - If desired, an additional channel can be added to the output for visualization,
+        to make it a standard 3-channel RGB image.
+
     Raises:
         ValueError: If `sizes` are floats and do not sum to 1.
         ValueError: If `sizes` are ints and sum of them exceeds available samples.
