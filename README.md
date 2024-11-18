@@ -6,7 +6,7 @@ This repository provides **CMNIST** and **10CMNIST** datasets. The implementatio
 
 - **CMNIST**: Derived from the paper *Invariant Risk Minimization* by Arjovsky et al., this dataset simulates environmental biases in the MNIST dataset to evaluate invariant learning methods. ([Paper](https://arxiv.org/abs/1907.02893), [GitHub](https://github.com/facebookresearch/InvariantRiskMinimization))
   
-- **10CMNIST**: Based on the paper *Towards Environment Invariant Representation Learning*, this dataset extends the CMNIST concept to ten distinct environments, providing a robust testing ground for environment-aware models. ([Paper](https://openreview.net/forum?id=c4l4HoM2AFf))
+- **10CMNIST**: Based on the paper *Towards Environment Invariant Representation Learning*, this dataset extends the CMNIST concept to ten distinct environments. ([Paper](https://openreview.net/forum?id=c4l4HoM2AFf))
 
 
 ## Dataset Preparation
