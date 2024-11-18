@@ -3,12 +3,9 @@ This module contains a class for creating and managing `CMNIST` dataset.
 """
 
 import torch
-import matplotlib.pyplot as plt
 
 from torch.utils.data import Dataset, ConcatDataset, Subset
 from torchvision import datasets
-from torchvision.utils import make_grid
-from utils import show_image
 
 
 class CMNISTDataset(Dataset):
@@ -199,25 +196,8 @@ if __name__ == "__main__":
 
     cmnist = CMNIST(r"...")  # NOTE
     envs_dataset = cmnist.create_environments()
+    envs_dataset_combined = cmnist.create_environments(True)
 
-    for env_num, env in enumerate(envs_dataset):
-        mask = (env[:][1] == 0).squeeze()
-
-        high_numbers = env[:][0][mask]
-        low_numbers = env[:][0][~mask]
-
-        high_samples = make_grid(list(high_numbers[:25]), 5, 5)
-        low_samples = make_grid(list(low_numbers[:25]), 5, 5)
-
-        plt.subplot(2, 3, 1 + env_num)
-        show_image(low_samples.cpu())
-        plt.title(f"Env {env_num+1} - Low")
-
-        plt.subplot(2, 3, 4 + env_num)
-        show_image(high_samples.cpu())
-        plt.title(f"Env {env_num+1} - High")
-        plt.tight_layout()
-
-    plt.suptitle("Training and Test Environments")
-    plt.tight_layout()
-    plt.show()
+    print(f"{envs_dataset = }")
+    print(f"{envs_dataset_combined = }")
+    print(f"{envs_dataset_combined[0] = }")
