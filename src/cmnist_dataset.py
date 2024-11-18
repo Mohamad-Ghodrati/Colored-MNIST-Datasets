@@ -39,7 +39,7 @@ class CMNISTDataset(Dataset):
         self.transform = transform
 
     def __getitem__(self, index):
-        if self.transform:
+        if self.transform is not None:
             return (
                 self.transform(self.images[index]),
                 self.labels[index],

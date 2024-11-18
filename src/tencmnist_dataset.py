@@ -47,6 +47,7 @@ class CMNIST10(Dataset):
         self.colors = colors
         self.train = train
         self.downsample = downsample
+        self.transform = transform
 
     @staticmethod
     def _load_mnist(root, train, download, transform):
@@ -70,6 +71,8 @@ class CMNIST10(Dataset):
         image = self.images[index][::2, ::2] if self.downsample else self.images[index]
         label = self.labels[index]
         image = self._change_color(image, label)
+        if self.transform is not None:
+            return self.transform(image), label
         return image, label
 
     def __len__(self):
