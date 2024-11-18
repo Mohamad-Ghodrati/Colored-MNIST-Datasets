@@ -43,17 +43,15 @@ class CMNIST10(Dataset):
         downsample: bool = True,
     ):
 
-        self.images, self.labels = self._load_mnist(root, train, download, transform)
+        self.images, self.labels = self._load_mnist(root, train, download)
         self.colors = colors
         self.train = train
         self.downsample = downsample
         self.transform = transform
 
     @staticmethod
-    def _load_mnist(root, train, download, transform):
-        mnist = datasets.MNIST(
-            root, train=train, download=download, transform=transform
-        )
+    def _load_mnist(root, train, download):
+        mnist = datasets.MNIST(root, train=train, download=download)
         return mnist.data, mnist.targets
 
     def _change_color(self, image, label):

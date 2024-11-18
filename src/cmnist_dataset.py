@@ -96,12 +96,13 @@ class CMNIST:
         transform: torch.nn.Module | None = None,
         downsample: bool = True,
     ):
-        self.mnist = self._load_mnist(root, train, download, transform)
+        self.mnist = self._load_mnist(root, train, download)
         self.sizes = sizes
         self.e_s = e_s
         self.train = train
         self.shuffle = shuffle
         self.p_flip_label = p_flip_label
+        self.transform = transform
         self.downsample = downsample
 
         if len(self.sizes) != len(self.e_s):
@@ -117,8 +118,8 @@ class CMNIST:
                 )
 
     @staticmethod
-    def _load_mnist(root, train, download, transform):
-        return datasets.MNIST(root, train=train, download=download, transform=transform)
+    def _load_mnist(root, train, download):
+        return datasets.MNIST(root, train=train, download=download)
 
     @staticmethod
     def _combine_datasets(environments_datasets):
@@ -184,7 +185,7 @@ class CMNIST:
             images[torch.arange(len(images)), (1 - colors).long(), :, :] *= 0
             images = images / 255
 
-            dataset = CMNISTDataset(images, labels, environment)
+            dataset = CMNISTDataset(images, labels, environment, self.transform)
             environment_datasets.append(dataset)
 
         if combine_datasets:
