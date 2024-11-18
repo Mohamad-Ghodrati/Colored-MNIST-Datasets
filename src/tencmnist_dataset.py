@@ -16,9 +16,11 @@ class CMNIST10(Dataset):
     In the test set, digits are colored with a random color that is not their associated label's color.
 
     Args:
-        images (torch.Tensor): The images from the MNIST dataset.
-        labels (torch.Tensor): The corresponding labels for the images.
-        colors (tuples of tuples): A tuples of RGB color values corresponding to each digit class (0-9).
+        root (str): Directory path to save or load the MNIST data.
+        download (bool, optional): If True, download MNIST if not present. Default is True.
+        colors (tuple[tuples], optional): A tuples of RGB color values corresponding to each digit class (0-9).
+        train (bool, optional): Use the training or test split of MNIST. Default is True.
+        transform (torch.nn.Module, optional): Optional transformations for MNIST images. Default is None.
         downsample (bool, optional): If True, downsample MNIST images from 28x28 to
                                      14x14. Default is True.
 
@@ -28,7 +30,7 @@ class CMNIST10(Dataset):
         - If desired, an additional channel can be added to the output for visualization,
           to make it a standard 3-channel RGB image.
 
-        is_train (bool): Whether the dataset is used for training or testing.
+
     """
 
     def __init__(
