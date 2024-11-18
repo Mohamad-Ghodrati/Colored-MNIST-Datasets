@@ -129,6 +129,11 @@ class CMNIST:
         indices = torch.randperm(len(combined_dataset))
         return Subset(combined_dataset, indices)
 
+    @staticmethod
+    def _shuffle_dataset(images, labels):
+        indices = torch.randperm(len(labels))
+        return images[indices], labels[indices]
+
     def create_environments(self, combine_datasets=False):
         """
         Creates datasets for different environments.
@@ -153,16 +158,17 @@ class CMNIST:
         environment_datasets = []
         last_index = 0
 
+        # I didn't want to shuffle the MNIST data in place; if I did so, calling
+        # create_dataset each time would return random datasets without reproducibility
+        mnist_images, mnist_labels = self.mnist.data, self.mnist.targets
         if self.shuffle:
-            indices = torch.randperm(len(self.mnist.targets))
-            self.mnist.data = self.mnist.data[indices]
-            self.mnist.targets = self.mnist.targets[indices]
+            mnist_images, mnist_labels = self._shuffle_dataset(
+                mnist_images, mnist_labels
+            )
 
         for environment, e in enumerate(self.e_s):
-            images = self.mnist.data[last_index : last_index + self.sizes[environment]]
-            labels = self.mnist.targets[
-                last_index : last_index + self.sizes[environment]
-            ]
+            images = mnist_images[last_index : last_index + self.sizes[environment]]
+            labels = mnist_labels[last_index : last_index + self.sizes[environment]]
             last_index += self.sizes[environment]
 
             if self.downsample:
