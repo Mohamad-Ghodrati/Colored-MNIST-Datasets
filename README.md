@@ -14,10 +14,7 @@ The datasets are generated from the original MNIST dataset. Use the provided scr
 
 ## Usage
 
-### Example Workflow
-
-
-Open the Jupyter [notebook](notebooks/dataset_usage_demo.ipynb) in `notebooks/dataset_usage_demo.ipynb` to explore the datasets:
+Open the Jupyter [notebook](notebooks/dataset_usage_demo.ipynb) in `notebooks/dataset_usage_demo.ipynb` to explore the datasets.
    
    
 
